@@ -1,12 +1,12 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
-#   Makefile of /CoreOS/usbguard/Sanity/selinux
-#   Description: Test for BZ#1683567 ([RFE] SELinux policy (daemons) changes required)
-#   Author: Dalibor Pospisil <dapospis@redhat.com>
+#   Makefile of /CoreOS/usbguard/Sanity/rules-fuzz
+#   Description: performs fuzz testing on config/rules files
+#   Author: Jiri Jaburek <jjaburek@redhat.com>
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
-#   Copyright (c) 2020 Red Hat, Inc.
+#   Copyright (c) 2017 Red Hat, Inc.
 #
 #   This copyrighted material is made available to anyone wishing
 #   to use, modify, copy, or redistribute it subject to the terms
@@ -24,12 +24,12 @@
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-export TEST=/CoreOS/usbguard/Sanity/selinux
+export TEST=/CoreOS/usbguard/Sanity/rules-fuzz
 export TESTVERSION=1.0
 
 BUILT_FILES=
 
-FILES=$(METADATA) runtest.sh Makefile PURPOSE
+FILES=$(METADATA) runtest.sh Makefile PURPOSE usbguard-rules.dict
 
 .PHONY: all install download clean
 
@@ -46,23 +46,21 @@ clean:
 include /usr/share/rhts/lib/rhts-make.include
 
 $(METADATA): Makefile
-	@echo "Owner:           Dalibor Pospisil <dapospis@redhat.com>" > $(METADATA)
+	@echo "Owner:           Jiri Jaburek <jjaburek@redhat.com>" > $(METADATA)
 	@echo "Name:            $(TEST)" >> $(METADATA)
 	@echo "TestVersion:     $(TESTVERSION)" >> $(METADATA)
 	@echo "Path:            $(TEST_DIR)" >> $(METADATA)
-	@echo "Description:     Test for BZ#1683567 ([RFE] SELinux policy (daemons) changes required)" >> $(METADATA)
+	@echo "Description:     performs fuzz testing on config/rules files" >> $(METADATA)
 	@echo "Type:            Sanity" >> $(METADATA)
-	@echo "TestTime:        5m" >> $(METADATA)
+	@echo "TestTime:        30h" >> $(METADATA)
 	@echo "RunFor:          usbguard" >> $(METADATA)
-	@echo "Requires:        usbguard usbguard-selinux" >> $(METADATA)
-	@echo "RhtsRequires:    library(distribution/dpcommon)" >> $(METADATA)
-	@echo "RhtsRequires:    library(selinux-policy/common)" >> $(METADATA)
+	@echo "Requires:        usbguard usbguard-tools gcc gcc-c++ make curl rpm-build yum-utils dnf-utils git" >> $(METADATA)
+	@echo "RhtsRequires:    library(distribution/fuzz)" >> $(METADATA)
 	@echo "Priority:        Normal" >> $(METADATA)
 	@echo "License:         GPLv2" >> $(METADATA)
 	@echo "Confidential:    no" >> $(METADATA)
 	@echo "Destructive:     no" >> $(METADATA)
-	@echo "Bug:             1683567" >> $(METADATA)
-	@echo "Bug:             1847870" >> $(METADATA)
-	@echo "Releases:        -RHEL4 -RHELClient5 -RHELServer5" >> $(METADATA)
+	@echo "Releases:        -RHEL4 -RHELClient5 -RHELServer5 -RHEL6" >> $(METADATA)
+	@echo "Architectures:	x86_64" >> $(METADATA)
 
 	rhts-lint $(METADATA)
