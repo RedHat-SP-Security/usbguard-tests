@@ -8,3 +8,4 @@ require:
   - usbguard
 recommend:
   - usbguard-selinux
+framework: beakerlib
