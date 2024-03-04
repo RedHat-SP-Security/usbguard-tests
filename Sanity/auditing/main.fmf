@@ -9,6 +9,10 @@ tag:
 - rhel-8.4.0
 - Tier1
 tier: '1'
+adjust+:
+  - when: arch == ppc64le
+    enabled: false
+    because: usb controller often missing on ppc64le
 /file:
   summary: Check auditing to file
   environment:

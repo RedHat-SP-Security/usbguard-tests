@@ -12,6 +12,10 @@ tag:
   - rhel-8.7.0
   - Tier1
 tier: '1'
+adjust+:
+  - when: arch == ppc64le
+    enabled: false
+    because: usb controller often missing on ppc64le
 duration: 5m
 test: ./runtest.sh
 summary: Sanity test for usbguard-dbus
