@@ -16,7 +16,8 @@ recommend:
 - dnf-utils
 - git
 duration: 30h
-enabled: true
+#Test is unstable, added JIRA ticket as technical debt
+enabled: false
 tag:
 - NoRHEL4
 - NoRHEL5
