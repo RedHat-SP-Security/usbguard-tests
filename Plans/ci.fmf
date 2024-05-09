@@ -1,0 +1,18 @@
+summary: test plan for usbguard upstream testing
+
+
+prepare:
+  - how: shell
+    script:
+     - systemctl disable --now dnf-makecache.service || true
+     - systemctl disable --now dnf-makecache.timer || true
+     - dnf makecache
+
+discover:
+  - name: Upstream_tests_ci_usbguard
+    how: fmf
+    filter: tag:FedoraCI
+
+execute:
+    how: tmt
+
