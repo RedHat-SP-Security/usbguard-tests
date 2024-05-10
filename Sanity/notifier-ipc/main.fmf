@@ -23,4 +23,6 @@ link:
 adjust+:
 -   enabled: false
     when: distro < rhel-8.6
+-   enabled: false
+    when: distro >= rhel-10
 extra-nitrate: TC#0611602
