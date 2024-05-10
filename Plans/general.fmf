@@ -1,0 +1,35 @@
+summary: test plan for usbguard errata testing
+
+#required usage of machine with usb controller
+
+provision:
+    hostname: "~ intel*"
+
+prepare:
+  - how: shell
+    script:
+     - systemctl disable --now dnf-makecache.service || true
+     - systemctl disable --now dnf-makecache.timer || true
+     - dnf makecache
+
+discover:
+  - name: Upstream_usbguard_tests
+    how: fmf
+    url: https://github.com/RedHat-SP-Security/usbguard-tests
+    ref: notifier
+    test:
+      - /Regression
+      - /Sanity
+    exclude:
+      - /Sanity/rules-fuzz
+
+adjust:
+  - when: distro == rhel-9 or distro == centos-stream-9
+    prepare+:
+      - how: shell
+        script:
+          - dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm https://dl.fedoraproject.org/pub/epel/epel-next-release-latest-9.noarch.rpm
+
+execute:
+    how: tmt
+
