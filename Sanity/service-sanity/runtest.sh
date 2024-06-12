@@ -84,7 +84,7 @@ rlJournalStart
         rlRun "systemctl daemon-reexec"
         rlRun "rlServiceStart usbguard"
         rlRun -s "journalctl --no-pager --since=\"$start_time\""
-		rlRun "systemctl is-active usbguard"
+        rlRun "systemctl is-active usbguard"
 
         rlAssertNotGrep "IPAddressDeny" $rlRun_LOG
         rm -rf $rlRun_LOG
