@@ -64,6 +64,7 @@ rlJournalStart && {
       > /var/log/usbguard/usbguard-audit.log
       set_config_option AuditBackend FileAudit
       rlRun "rlServiceStart usbguard"
+      rlRun "sleep 3s"
       rlRun -s "cat /var/log/usbguard/usbguard-audit.log"
       rlAssertGrep "result='SUCCESS" $rlRun_LOG
       rm -f $rlRun_LOG
@@ -79,6 +80,7 @@ rlJournalStart && {
       > /var/log/usbguard/usbguard-audit.log
       set_config_option AuditBackend LinuxAudit
       rlRun "rlServiceStart usbguard"
+      rlRun "sleep 3s"
       rlRun -s "LC_ALL='en_US.UTF-8' ausearch --input-logs -m USER_DEVICE -ts $start_time" 0,1
       rlAssertGrep 'USER_DEVICE' $rlRun_LOG
       rm -f $rlRun_LOG

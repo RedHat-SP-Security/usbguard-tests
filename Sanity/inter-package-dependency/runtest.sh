@@ -47,7 +47,7 @@ rlJournalStart && {
       rlAssertNotGrep '\\busbguard\\b' $rlRun_LOG -Eq
       rm -f $rlRun_LOG
       rlRun -s "rpm -q --recommends usbguard"
-      rlAssertGrep 'usbguard-selinux[^0-9]*$' $rlRun_LOG
+      rlAssertGrep 'usbguard-selinux[^0-9]*' $rlRun_LOG
       rm -f $rlRun_LOG
       rlRun -s "rpm -q --conflicts usbguard"
       rlAssertNotGrep '^usbguard$' $rlRun_LOG

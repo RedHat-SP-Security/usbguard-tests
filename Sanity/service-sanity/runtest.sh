@@ -79,19 +79,16 @@ rlJournalStart
     rlPhaseEnd
 
     rlPhaseStartTest "IPAddressDeny, bz1929364" && {
-      start_time=$(date +"%F %T")
-      rlRun "systemctl daemon-reload"
-      rlRun "systemctl daemon-reexec"
-      rlRun "rlServiceStart usbguard"
-      rlRun -s "journalctl --no-pager --since=\"$start_time\""
-      if rlIsFedora; then
-          rlAssertGrep "Started usbguard.service - USBGuard daemon" $rlRun_LOG
-      else
-          rlAssertGrep "Started USBGuard daemon" $rlRun_LOG
-      fi
-      rlAssertNotGrep "IPAddressDeny" $rlRun_LOG
-      rm -rf $rlRun_LOG
-      rlRun "rlServiceStatus usbguard"
+        start_time=$(date +"%F %T")
+        rlRun "systemctl daemon-reload"
+        rlRun "systemctl daemon-reexec"
+        rlRun "rlServiceStart usbguard"
+        rlRun -s "journalctl --no-pager --since=\"$start_time\""
+        rlRun "systemctl is-active usbguard"
+
+        rlAssertNotGrep "IPAddressDeny" $rlRun_LOG
+        rm -rf $rlRun_LOG
+        rlRun "rlServiceStatus usbguard"
     rlPhaseEnd; }
 
     rlPhaseStartCleanup
