@@ -44,7 +44,7 @@ rlJournalStart
             key=$1
             value=$2
             rlLog "setting config option $key=$value"
-            egrep -E "^$key=.*" $CONFIG
+            grep -E "^$key=.*" $CONFIG
             if [ $? -eq 0 ]; then
                 sed -i -r  "s|^($key)=.*|\1=$value|" $CONFIG
             else
@@ -320,10 +320,10 @@ rlJournalStart
     #   [P2] AC: following values are accepted: "hardwired", "hotplug", "not used", "unknown", ""
     rlPhaseStartTest "New rule attribute: with-connect-type" && {
         regex='\"[^\"]*\"'
-        rlRun -s "usbguard generate-policy | egrep -o \"with-connect-type $regex\" | cut -d' ' -f2-" 0 "Create a list of attributes consisting of only with-connect-type"
+        rlRun -s "usbguard generate-policy | grep -E -o \"with-connect-type $regex\" | cut -d' ' -f2-" 0 "Create a list of attributes consisting of only with-connect-type"
         while IFS='' read -r line; do
             regex='^"(hotplug|hardwired|not used|unknown)?"$'
-            rlRun "echo $line | egrep $regex" 0 "$line should be match $regex"
+            rlRun "echo $line | grep -E $regex" 0 "$line should be match $regex"
         done < $rlRun_LOG
     rlPhaseEnd; }
 
