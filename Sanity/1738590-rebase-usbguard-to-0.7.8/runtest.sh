@@ -58,6 +58,16 @@ rlJournalStart
         sed -i -r "/^$key=/d" /etc/usbguard/usbguard-daemon.conf
     }
 
+    # returns 0 (success) when it's empty, otherwise 1 (failure)
+    deviceListEmpty() {
+        echo "Called deviceListEmpty"
+        if [ $(usbguard list-devices | wc -l) -eq 0 ]; then
+	        return 0
+        else
+            return 1
+        fi
+    }
+
     rlPhaseStartSetup
         rlAssertRpm $PACKAGE
         rlRun "rlImport --all"
@@ -68,6 +78,8 @@ rlJournalStart
         rlRun "rlSEBooleanOn usbguard_daemon_write_conf"
         rlRun "rlServiceStart usbguard"
         rlRun "sleep 3s"
+        # Some scenarios can not be tested if there are no devices at all.
+        deviceListEmpty && rlLogWarning "Device list is empty. Some tests will be skipped. This is expected for certain machines."
     rlPhaseEnd
 
     # [P0] AC: freeze and unfreeze the daemon using SIGSTOP and SIGCONT does not cause daemon’s failure and exit
@@ -201,7 +213,7 @@ rlJournalStart
     #     [P2] AC: commands allow, block, and reject accept a rule as a input
     #     [P2] AC: all devices matching the rule are allowed, blocked, and rejected, respectively
     #     [P3] AC: if -p is used, rules for all the matching devices will be added to the policy file
-    rlPhaseStartTest "{allow, block, reject}-device can handle rule as a parameter, bz1852568" && {
+    deviceListEmpty || rlPhaseStartTest "{allow, block, reject}-device can handle rule as a parameter, bz1852568" && {
         rlRun "usbguard list-devices"
         echo -n '' > $RULES
         # Get first device rule of the list and remove via-port attribute
@@ -246,7 +258,7 @@ rlJournalStart
         echo -n '' > $RULES
     rlPhaseEnd; }
 
-    rlPhaseStartTest "{allow, block, reject}-device can handle rule as one parameter" && {
+    deviceListEmpty || rlPhaseStartTest "{allow, block, reject}-device can handle rule as one parameter" && {
         rlRun "usbguard list-devices"
         echo -n '' > $RULES
         # Get first device rule of the list and remove via-port attribute
