@@ -35,7 +35,6 @@ PACKAGE="usbguard"
 rlJournalStart && {
   rlPhaseStartSetup && {
     rlRun "rlImport --all" 0 "Import libraries" || rlDie "cannot continue"
-    tcfRun "rlCheckMakefileRequires" || rlDie "cannot continue"
     rlRun "TmpDir=\$(mktemp -d)" 0 "Creating tmp directory"
     CleanupRegister "rlRun 'rm -r $TmpDir' 0 'Removing tmp directory'"
     CleanupRegister 'rlRun "popd"'
@@ -52,7 +51,14 @@ rlJournalStart && {
       rlSEMatchPathCon "/etc/usbguard/rules.d/test" "usbguard_rules_t"
       rlSEMatchPathCon "/etc/usbguard/usbguard-daemon.conf" "usbguard_conf_t"
       rlSEMatchPathCon "/usr/sbin/usbguard-daemon" "usbguard_exec_t"
-      rlSEMatchPathCon "/var/run/usbguard.pid" "usbguard_var_run_t"
+      if rlIsRHELLike '<10'; then
+          rlSEMatchPathCon "/var/run/usbguard.pid" "usbguard_var_run_t"
+      else
+          #see https://github.com/USBGuard/usbguard-selinux/commit/3534057c48a2c5f13c8209e8f67833fb7a086900 
+          rlServiceStart usbguard
+          rlSEMatchPathCon "/run/usbguard.pid" "usbguard_var_run_t"
+          rlServiceStop usbguard
+      fi
     rlPhaseEnd; }
 
     rlPhaseStartTest "policy rules" && {
