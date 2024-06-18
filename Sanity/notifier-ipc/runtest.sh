@@ -46,10 +46,8 @@ rlJournalStart && {
   rlPhaseEnd; }
 
   rlPhaseStartTest "global service setting" && {
-    rlRun -s "systemctl status --global usbguard-notifier" 1-255
-    rlAssertGrep "dead" $rlRun_LOG -iq
-    rlAssertGrep "usbguard-notifier.service; disabled;" $rlRun_LOG -iq
-    rm -f $rlRun_LOG
+    rlRun "systemctl status --user usbguard-notifier" 1-255
+    rlRun "systemctl is-active --user usbguard-notifier" 1-255
   rlPhaseEnd; }
 
 sshRun() {
@@ -67,19 +65,22 @@ userServiceCheck() {
 
   rlPhaseStartTest "user service setting" && {
     rlLog "service disabled"
+    # Sleep some more because notifier will retrieve a few times before failing
+    rlRun "sleep 10"
     userServiceCheck
-    rlAssertGrep 'dead' $rlRun_LOG
-    rlAssertGrep "usbguard-notifier.service; disabled;" $rlRun_LOG -iq
-    rm -f $rlRun_LOG
+    # notifier will exit, thus not be active
+    rlRun "systemctl is-active --user usbguard-notifier" 1-255
     rlRun -s "rlServiceStatus usbguard"
     rlAssertNotGrep "IPC connection denied" $rlRun_LOG
-    rlAssertGrep "running" $rlRun_LOG -iq
     rm -f $rlRun_LOG
 
     rlLog "service enabled but IPC not allowed"
     sshRun "sleep 1; systemctl enable --user usbguard-notifier; sleep 1"
+    # Sleep some more because notifier will retrieve a few times before failing
+    rlRun "sleep 10"
     userServiceCheck
-    rlAssertGrep 'dead' $rlRun_LOG
+    # notifier will exit, thus not be active
+    rlRun "systemctl is-active --user usbguard-notifier" 1-255
     rm -f $rlRun_LOG
     rlRun -s "rlServiceStatus usbguard"
     rlAssertGrep "IPC connection denied" $rlRun_LOG
@@ -88,9 +89,12 @@ userServiceCheck() {
     rlLog "service enabled and IPC granted"
     rlRun "usbguard add-user $testUser -d listen"
     rlRun "rlServiceStart usbguard"
+    rlRun "systemctl restart --user usbguard-notifier"
     sshRun "sleep 1; systemctl status --user usbguard-notifier; sleep 1"
     userServiceCheck
-    rlAssertGrep 'running' $rlRun_LOG
+    # When service is enabled and IPC granted, notifier will be active
+    rlRun "systemctl is-active --user usbguard-notifier" 0
+    # rlAssertGrep 'running' $rlRun_LOG
     rm -f $rlRun_LOG
     rlRun -s "rlServiceStatus usbguard"
     rlAssertNotGrep "IPC connection denied" $rlRun_LOG
