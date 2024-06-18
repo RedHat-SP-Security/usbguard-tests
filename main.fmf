@@ -6,6 +6,9 @@ adjust:
     continue: false
 require:
   - usbguard
+  - url: https://github.com/RedHat-SP-Security/usbguard-tests
+    ref: master
+    name: /Library/usbguard-basic
 recommend:
   - usbguard-selinux
 framework: beakerlib
