@@ -100,19 +100,31 @@ rlJournalStart && {
     rlRunAs ${testUser[0]} 'usbguard list-devices' 1-255
     rlRunAs ${testUser[0]} 'usbguard list-rules' 1-255
     rlRunAs ${testUser[0]} 'usbguard get-parameter InsertedDevicePolicy' 1-255
-    rlRun "usbguard add-user ${testUserUID[0]} --device list"
+    if rlIsRHELLike '<10'; then
+        rlRun "usbguard add-user ${testUserUID[0]} --device list"
+    else
+        rlRun "usbguard add-user ${testUser[0]} --device list"
+    fi
     rlRun "showACLfolder"
     rlRun "rlServiceStart 'usbguard'"
     rlRunAs ${testUser[0]} 'usbguard list-devices' 0
     rlRunAs ${testUser[0]} 'usbguard list-rules' 1-255
     rlRunAs ${testUser[0]} 'usbguard get-parameter InsertedDevicePolicy' 1-255
-    rlRun "usbguard add-user ${testUserGID[0]} -g --policy list"
+    if rlIsRHELLike '<10'; then
+        rlRun "usbguard add-user ${testUserGID[0]} -g --policy list"
+    else
+        rlRun "usbguard add-user ${testUser[0]} -g --policy list"
+    fi
     rlRun "showACLfolder"
     rlRun "rlServiceStart 'usbguard'"
     rlRunAs ${testUser[0]} 'usbguard list-devices' 0
     rlRunAs ${testUser[0]} 'usbguard list-rules' 0
     rlRunAs ${testUser[0]} 'usbguard get-parameter InsertedDevicePolicy' 1-255
-    rlRun "usbguard add-user ${testUserGID[1]} -g --parameters list"
+    if rlIsRHELLike '<10'; then
+        rlRun "usbguard add-user ${testUserGID[1]} -g --parameters list"
+    else
+        rlRun "usbguard add-user ${testUser[1]} -g --parameters list"
+    fi
     rlRun "showACLfolder"
     rlRun "rlServiceStart 'usbguard'"
     rlRunAs ${testUser[0]} 'usbguard list-devices' 0
