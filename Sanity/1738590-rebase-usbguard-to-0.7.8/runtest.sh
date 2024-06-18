@@ -61,7 +61,7 @@ rlJournalStart
     rlPhaseStartSetup
         rlAssertRpm $PACKAGE
         rlRun "rlImport --all" 0 "Import libraries" || rlDie "cannot continue"
-        guardlibDeviceExist
+        rlRun "guardlibDeviceExist" 1 #if exist = exit code 1
         rlAssertExists $CONFIG
         rlAssertExists $RULES
         rlRun "TmpFile=\$(mktemp)" 0 "Creating a temporary file"
