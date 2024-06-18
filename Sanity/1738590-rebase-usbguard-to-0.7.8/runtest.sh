@@ -60,7 +60,7 @@ rlJournalStart
 
     rlPhaseStartSetup
         rlAssertRpm $PACKAGE
-        rlRun "rlImport --all"
+        rlRun "rlImport --all" 0 "Import libraries" || rlDie "cannot continue"
         guardlibDeviceExist
         rlAssertExists $CONFIG
         rlAssertExists $RULES
