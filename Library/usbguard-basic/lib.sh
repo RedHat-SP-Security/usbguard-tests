@@ -69,13 +69,13 @@ guardlibDeviceExist() {
         if [ $(usbguard list-devices | wc -l) -eq 0 ]; then
             rlServiceStop usbguard
             sleep 3s
-            rlLogWarning "Device list is not empty. Some tests will be skipped. This is expected for certain machines."
+            rlDie "Device list is empty. Tests will be skipped. This is expected for certain machines."
 	        return 0
         else
             # Some scenarios can not be tested if there are no devices at all.
             rlServiceStop usbguard
             sleep 3s
-            rlDie "Device list is empty. Tests will be skipped. This is expected for certain machines."
+            rlLogWarning "Device list is not empty. Test can continue."
             return 1
         fi
 
