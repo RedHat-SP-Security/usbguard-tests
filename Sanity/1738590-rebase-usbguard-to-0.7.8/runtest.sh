@@ -61,6 +61,7 @@ rlJournalStart
     rlPhaseStartSetup
         rlAssertRpm $PACKAGE
         rlRun "rlImport --all"
+        guardlibDeviceExist
         rlAssertExists $CONFIG
         rlAssertExists $RULES
         rlRun "TmpFile=\$(mktemp)" 0 "Creating a temporary file"
