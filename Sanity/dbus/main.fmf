@@ -4,7 +4,6 @@ require+:
   - library(ControlFlow/Cleanup)
   - library(distribution/testUser)
   - usbguard-dbus
-  - /usr/sbin/usbguard-dbus
   - /usr/bin/pkaction
   - /usr/bin/dbus-send
 tag:
