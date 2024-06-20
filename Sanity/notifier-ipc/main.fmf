@@ -11,9 +11,9 @@ enabled: true
 require+:
 - library(ControlFlow/Cleanup)
 - library(distribution/testUser)
-- /usr/sbin/sshd
+- sshd
 - usbguard-notifier
-- /usr/bin/expect
+- expect
 tag:
 - CI-Tier-1
 - Tier1

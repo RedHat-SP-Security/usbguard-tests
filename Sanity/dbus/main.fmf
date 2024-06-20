@@ -5,7 +5,7 @@ require+:
   - library(distribution/testUser)
   - usbguard-dbus
   - /usr/bin/pkaction
-  - /usr/bin/dbus-send
+  - dbus
 tag:
   - CI-Tier-1
   - rhel-8.7.0
