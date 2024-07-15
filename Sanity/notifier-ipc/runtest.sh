@@ -104,6 +104,8 @@ userServiceCheck() {
 
   rlPhaseStartCleanup && {
     CleanupDo
+    #usbguard notifial need to stopped
+    rlRun "systemctl stop --user usbguard-notifier"
   rlPhaseEnd; }
   rlJournalPrintText
 rlJournalEnd; }

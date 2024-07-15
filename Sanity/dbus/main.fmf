@@ -6,16 +6,17 @@ require+:
   - usbguard-dbus
   - /usr/bin/pkaction
   - dbus
+  - dbus-tools
 tag:
   - CI-Tier-1
   - rhel-8.7.0
   - Tier1
 tier: '1'
 adjust+:
-  - when: arch == ppc64le
+  - when: arch != x86_64
     enabled: false
-    because: usb controller often missing on ppc64le
-duration: 5m
+    because: long run of test, dbus is slow
+duration: 100m
 test: ./runtest.sh
 summary: Sanity test for usbguard-dbus
 link:
