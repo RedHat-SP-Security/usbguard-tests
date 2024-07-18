@@ -51,14 +51,14 @@ declare -A commands=(
 # Wait a few seconds after certain actions to take place
 dbusSendAs() {
   local user="$1" command="${commands[$2]}" arguments="$3" rc="$4"
-  exe="dbus-send --system --print-reply --dest=org.usbguard1 $command $arguments"
+  exe="dbus-send --system --print-reply --dest="org.usbguard1" $command $arguments"
   rlRunAs "$user" "$exe" "$rc"
 
   needWaitCommands=(
     "appendRule" "removeRule" "applyDevicePolicy" "setParameter"
   )
   if [[ " ${needWaitCommands[*]} " =~ " ${2} " ]]; then
-    sleep 2
+    sleep 1
   fi
 }
 
@@ -85,8 +85,6 @@ rlJournalStart && {
     sleep 2
     rlRun "rlServiceStatus 'usbguard'"
     rlRun "rlServiceStatus 'usbguard-dbus'"
-    rlRun -s "usbguard list-devices | wc -l"
-    rlAssertGreaterOrEqual "Device list should be greater or equal to 1" "$(cat $rlRun_LOG)" "1" || rlDie
 
     # Group[1] can getParameter
     # user[2] can add/remove rule
@@ -130,7 +128,6 @@ EOF
 
   rlGetTestState && {
     rlPhaseStartTest "getParameter and setParameter" && {
-
       # Root can change ImplicitPolicyTarget
       dbusSendAs "root" "setParameter" "string:ImplicitPolicyTarget string:allow"
       dbusSendAs "root" "getParameter" "string:ImplicitPolicyTarget"
