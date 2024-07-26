@@ -43,6 +43,9 @@ rlJournalStart && {
     rlRun "rlServiceStart usbguard"
     CleanupRegister 'rlRun "testUserCleanup"'
     rlRun "testUserSetup"
+    #systemd-logind could be broken by dbus test, provide restart of service
+    rlRun "systemctl restart systemd-logind"
+    sleep 2
   rlPhaseEnd; }
 
   rlPhaseStartTest "global service setting" && {
