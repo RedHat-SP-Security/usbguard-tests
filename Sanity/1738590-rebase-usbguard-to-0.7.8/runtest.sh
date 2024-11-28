@@ -202,7 +202,7 @@ rlJournalStart
     #     [P2] AC: commands allow, block, and reject accept a rule as a input
     #     [P2] AC: all devices matching the rule are allowed, blocked, and rejected, respectively
     #     [P3] AC: if -p is used, rules for all the matching devices will be added to the policy file
-    rlPhaseStartTest "{allow, block, reject}-device can handle rule as a parameter, bz1852568" && {
+    rlPhaseStartTest "Test: {allow, block, reject}-device can handle rule as a parameter, bz1852568" && {
         rlRun "usbguard list-devices"
         echo -n '' > $RULES
         # Get first device rule of the list and remove via-port attribute
@@ -247,7 +247,7 @@ rlJournalStart
         echo -n '' > $RULES
     rlPhaseEnd; }
 
-    rlPhaseStartTest "{allow, block, reject}-device can handle rule as one parameter" && {
+    rlPhaseStartTest "Test: {allow, block, reject}-device can handle rule as one parameter" && {
         rlRun "usbguard list-devices"
         echo -n '' > $RULES
         # Get first device rule of the list and remove via-port attribute

@@ -59,7 +59,7 @@ rlJournalStart && {
 
   if [[ "$auditTARGET" != "audit" ]]; then
     # file
-    rlPhaseStartTest "$auditTARGET" && {
+    rlPhaseStartTest "Audit target: $auditTARGET" && {
       start_time=`LC_ALL='en_US.UTF-8' date "+%x %T"`
       > /var/log/usbguard/usbguard-audit.log
       set_config_option AuditBackend FileAudit
@@ -75,7 +75,7 @@ rlJournalStart && {
     rlPhaseEnd; }
   elif [[ "$auditTARGET" != "file" ]]; then
     # audit
-    rlPhaseStartTest "$auditTARGET" && {
+    rlPhaseStartTest "Audit target: $auditTARGET" && {
       start_time=`LC_ALL='en_US.UTF-8' date "+%x %T"`
       > /var/log/usbguard/usbguard-audit.log
       set_config_option AuditBackend LinuxAudit
