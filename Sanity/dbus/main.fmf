@@ -11,6 +11,7 @@ tag:
   - CI-Tier-1
   - rhel-8.7.0
   - Tier1
+  - ImageMode
 tier: '1'
 adjust+:
   - when: arch != x86_64

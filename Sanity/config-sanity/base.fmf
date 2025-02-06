@@ -11,6 +11,7 @@ tag:
 - TIPfail
 - TIPfail_Security
 - Tier1
+- ImageMode
 - Tier1security
 extra-summary: CONDITIONAL_PHASES_BL='only|both' /CoreOS/usbguard/Sanity/config-sanity
 extra-task: /CoreOS/usbguard/Sanity/config-sanity

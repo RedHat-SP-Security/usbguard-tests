@@ -11,6 +11,7 @@ tag:
   - Tier1
   - rhel-8.8.0
   - rhel-9.2.0
+  - ImageMode
 tier: '1'
 adjust+:
   - enabled: false
