@@ -8,6 +8,7 @@ tag:
 - CI-Tier-1
 - rhel-8.4.0
 - Tier1
+- ImageMode
 tier: '1'
 adjust+:
   - when: arch == ppc64le

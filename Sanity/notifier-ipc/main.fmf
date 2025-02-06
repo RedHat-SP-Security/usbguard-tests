@@ -17,6 +17,7 @@ require+:
 tag:
 - CI-Tier-1
 - Tier1
+- ImageMode
 tier: '1'
 link:
     verifies: https://bugzilla.redhat.com/show_bug.cgi?id=2000000

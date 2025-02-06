@@ -8,6 +8,7 @@ require+:
       - CI-Tier-1
       - rhel-8.5.0
       - Tier1
+      - ImageMode
     tier: '1'
     duration: 5m
     test: ./runtest.sh

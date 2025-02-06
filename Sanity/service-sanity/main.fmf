@@ -16,6 +16,7 @@ tag:
 - TIPfail_Security
 - TIPpass
 - Tier1
+- ImageMode
 - Tier1security
 tier: '1'
 extra-summary: /CoreOS/usbguard/Sanity/service-sanity
