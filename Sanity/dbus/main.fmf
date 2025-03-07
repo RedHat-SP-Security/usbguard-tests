@@ -12,6 +12,7 @@ tag:
   - rhel-8.7.0
   - Tier1
   - ImageMode
+  - usb-device
 tier: '1'
 adjust+:
   - when: arch != x86_64
