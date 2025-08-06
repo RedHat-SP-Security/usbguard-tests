@@ -3,36 +3,36 @@ description: ''
 contact: Dalibor Pospisil <dapospis@redhat.com>
 test: ./runtest.sh
 require:
-- library(distribution/fuzz)
+  - library(distribution/fuzz)
 recommend:
-- usbguard
-- usbguard-tools
-- gcc
-- gcc-c++
-- make
-- curl
-- rpm-build
-- yum-utils
-- dnf-utils
-- git
+  - usbguard
+  - usbguard-tools
+  - gcc
+  - gcc-c++
+  - make
+  - curl
+  - rpm-build
+  - yum-utils
+  - dnf-utils
+  - git
 duration: 30h
-#Test is unstable, added JIRA ticket as technical debt
 enabled: false
 tag:
-- NoRHEL4
-- NoRHEL5
-- NoRHEL6
-- TIPpass
-- TIPpass_Security
-- fedora-wanted
-- rhel-buildroot
+  - NoRHEL4
+  - NoRHEL5
+  - NoRHEL6
+  - TIPpass
+  - TIPpass_Security
+  - fedora-wanted
+  - rhel-buildroot
 extra-summary: /CoreOS/usbguard/Sanity/rules-fuzz
 extra-task: /CoreOS/usbguard/Sanity/rules-fuzz
 extra-nitrate: TC#0560406
 adjust+:
--   enabled: false
+  - enabled: false
     when: arch != x86_64
     continue: false
--   enabled: false
+  - enabled: false
     when: distro ~< rhel-7.6
     continue: false
+id: 93fa75c3-9855-40aa-885e-d0c784e0e8d3

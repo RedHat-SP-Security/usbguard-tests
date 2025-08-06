@@ -16,9 +16,11 @@ require+:
     link:
       - verifies: https://bugzilla.redhat.com/show_bug.cgi?id=2004511
     extra-nitrate: TC#0611711
+    id: 4054cefb-548b-4a88-ad19-9edbd7c19869
 /basic:
     duration: 5m
     test: ./basic.sh
     summary: A basic IPC ACL test
     extra-nitrate: TC#0612868
     extra-task: /CoreOS/usbguard/Sanity/IPCACL/basic
+    id: 7501d009-f0d2-4936-958c-48cf58a4e0bb
