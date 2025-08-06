@@ -1,5 +1,7 @@
 environment:
-  CONDITIONAL_PHASES_BL: one parameter
-extra-summary: CONDITIONAL_PHASES_BL='one parameter' /CoreOS/usbguard/Sanity/1738590-rebase-usbguard-to-0.7.8
+    CONDITIONAL_PHASES_BL: one parameter
+extra-summary: CONDITIONAL_PHASES_BL='one parameter' 
+    /CoreOS/usbguard/Sanity/1738590-rebase-usbguard-to-0.7.8
 extra-task: /CoreOS/usbguard/Sanity/1738590-rebase-usbguard-to-0.7.8
 extra-nitrate: TC#0607528
+id: b0100428-9185-402b-b6d4-42b0689cc2e8
