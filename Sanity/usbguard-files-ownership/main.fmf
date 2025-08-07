@@ -1,0 +1,20 @@
+summary: Verify correct file ownership
+description: Verifies if important usbguard files have correct ownership
+contact: Natália Bubáková <nbubakov@redhat.com>
+component:
+  - usbguard
+test: ./runtest.sh
+framework: beakerlib
+recommend:
+  - usbguard
+duration: 5m
+enabled: true
+tag:
+  - CI-Tier-1
+  - Tier1
+tier: '1'
+adjust:
+  - enabled: false
+    when: distro == rhel-4, rhel-5, rhel-6, rhel-7, rhel-8
+    continue: false
+id: 4747a7a0-bde9-4610-8904-f918deb66801
