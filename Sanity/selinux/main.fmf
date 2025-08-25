@@ -5,28 +5,29 @@ description: |
 contact: Dalibor Pospíšil <dapospis@redhat.com>
 test: ./runtest.sh
 require:
-- library(distribution/dpcommon)
-- library(selinux-policy/common)
+  - library(distribution/dpcommon)
+  - library(selinux-policy/common)
 recommend:
-- usbguard
-- usbguard-selinux
+  - usbguard
+  - usbguard-selinux
 duration: 5m
 enabled: true
 tag:
-- CI-Tier-1
-- NoRHEL4
-- NoRHEL5
-- TIPpass
-- Tier2
-- rhel-8.3.0
+  - CI-Tier-1
+  - NoRHEL4
+  - NoRHEL5
+  - TIPpass
+  - Tier2
+  - rhel-8.3.0
 tier: '2'
 extra-summary: /CoreOS/usbguard/Sanity/selinux
 extra-task: /CoreOS/usbguard/Sanity/selinux
 extra-nitrate: TC#0607358
 adjust+:
--   enabled: false
+  - enabled: false
     when: distro < rhel-8
     continue: false
--   enabled: false
+  - enabled: false
     when: distro ~< rhel-8.3
     continue: false
+id: 2fb4e186-9b46-40b8-983a-fafe1294812a

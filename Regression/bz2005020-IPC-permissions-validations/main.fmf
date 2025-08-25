@@ -5,14 +5,15 @@ test: ./runtest.sh
 duration: 15m
 enabled: true
 require+:
-- library(ControlFlow/Cleanup)
-- usbguard
+  - library(ControlFlow/Cleanup)
+  - usbguard
 tag:
-- Tier3
+  - Tier3
 tier: '3'
 link:
--   verifies: https://bugzilla.redhat.com/show_bug.cgi?id=2005020
+  - verifies: https://bugzilla.redhat.com/show_bug.cgi?id=2005020
 adjust+:
--   enabled: false
+  - enabled: false
     when: distro < rhel-8.6
 extra-nitrate: TC#0611724
+id: 45bd097a-bef4-49e1-a7fe-4bf0555c4b2e

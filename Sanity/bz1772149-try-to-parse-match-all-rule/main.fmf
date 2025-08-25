@@ -3,21 +3,22 @@ description: ''
 contact: Dalibor Pospíšil <dapospis@redhat.com>
 test: ./runtest.sh
 recommend:
-- usbguard-tools
+  - usbguard-tools
 duration: 5m
 enabled: true
 tag:
-- FedoraCI
-- CI-Tier-1
-- TIPpass_Security
-- rhel-8.2
+  - FedoraCI
+  - CI-Tier-1
+  - TIPpass_Security
+  - rhel-8.2
 extra-summary: /CoreOS/usbguard/Sanity/bz1772149-try-to-parse-match-all-rule
 extra-task: /CoreOS/usbguard/Sanity/bz1772149-try-to-parse-match-all-rule
 extra-nitrate: TC#0605037
 adjust+:
--   enabled: false
+  - enabled: false
     when: distro < rhel-8
     continue: false
--   enabled: false
+  - enabled: false
     when: distro ~< rhel-8.2
     continue: false
+id: 2110cea1-eb18-42a2-9281-a5b1a4f8986c
