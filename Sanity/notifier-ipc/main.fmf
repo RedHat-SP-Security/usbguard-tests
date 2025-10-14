@@ -9,19 +9,20 @@ test: ./runtest.sh
 duration: 15m
 enabled: true
 require+:
-- library(ControlFlow/Cleanup)
-- library(distribution/testUser)
-- openssh-server
-- usbguard-notifier
-- expect
+  - library(ControlFlow/Cleanup)
+  - library(distribution/testUser)
+  - openssh-server
+  - usbguard-notifier
+  - expect
 tag:
-- CI-Tier-1
-- Tier1
-- ImageMode
+  - CI-Tier-1
+  - Tier1
+  - ImageMode
 tier: '1'
 link:
     verifies: https://bugzilla.redhat.com/show_bug.cgi?id=2000000
 adjust+:
--   enabled: false
+  - enabled: false
     when: distro < rhel-8.6
 extra-nitrate: TC#0611602
+id: 567ff31e-0d59-4dfa-ab40-407951d7b291

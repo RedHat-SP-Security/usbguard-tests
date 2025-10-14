@@ -3,24 +3,25 @@ description: ''
 contact: Dalibor Pospíšil <dapospis@redhat.com>
 test: ./runtest.sh
 recommend:
-- usbguard
+  - usbguard
 duration: 10m
 enabled: true
 tag:
-- FedoraCI
-- CI-Tier-1
-- CI-Tier-1-FIPS
-- NoRHEL4
-- NoRHEL5
-- NoRHEL6
-- TIPfail_Security
-- TIPpass
-- Tier1
-- ImageMode
-- Tier1security
+  - FedoraCI
+  - CI-Tier-1
+  - CI-Tier-1-FIPS
+  - NoRHEL4
+  - NoRHEL5
+  - NoRHEL6
+  - TIPfail_Security
+  - TIPpass
+  - Tier1
+  - ImageMode
+  - Tier1security
 tier: '1'
 extra-summary: /CoreOS/usbguard/Sanity/service-sanity
 extra-task: /CoreOS/usbguard/Sanity/service-sanity
 extra-nitrate: TC#0559491
 link:
--   verifies: https://bugzilla.redhat.com/show_bug.cgi?id=1929364
+  - verifies: https://bugzilla.redhat.com/show_bug.cgi?id=1929364
+id: 63ddd537-c5fa-48a5-958c-239d5c12fe7a

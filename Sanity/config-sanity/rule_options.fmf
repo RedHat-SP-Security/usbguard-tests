@@ -1,12 +1,14 @@
 environment:
-  CONDITIONAL_PHASES_WL: only|both
+    CONDITIONAL_PHASES_WL: only|both
 duration: 5m
 tag:
-- FedoraCI
-- CI-Tier-1
-extra-summary: CONDITIONAL_PHASES_WL='only|both' /CoreOS/usbguard/Sanity/config-sanity
+  - FedoraCI
+  - CI-Tier-1
+extra-summary: CONDITIONAL_PHASES_WL='only|both' 
+    /CoreOS/usbguard/Sanity/config-sanity
 extra-nitrate: TC#0608867
 adjust+:
--   enabled: false
+  - enabled: false
     when: distro ~< rhel-7.6
     continue: false
+id: bcea9924-419e-46e2-908f-7841b0e8c916

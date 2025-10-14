@@ -3,27 +3,29 @@ test: ./runtest.sh
 duration: 5m
 enabled: true
 require+:
-- library(ControlFlow/Cleanup)
+  - library(ControlFlow/Cleanup)
 tag:
-- CI-Tier-1
-- rhel-8.4.0
-- Tier1
-- ImageMode
-- usb-device
+  - CI-Tier-1
+  - rhel-8.4.0
+  - Tier1
+  - ImageMode
+  - usb-device
 tier: '1'
 adjust+:
   - when: arch == ppc64le
     enabled: false
     because: usb controller often missing on ppc64le
 /file:
-  summary: Check auditing to file
-  environment:
-    auditTARGET: file
-  extra-summary: auditTARGET=file /usbguard/Sanity/auditing
-  extra-nitrate: TC#0610001
+    summary: Check auditing to file
+    environment:
+        auditTARGET: file
+    extra-summary: auditTARGET=file /usbguard/Sanity/auditing
+    extra-nitrate: TC#0610001
+    id: 2db66405-674b-4e45-bbf6-050367501314
 /audit:
-  summary: Check auditing to audit
-  environment:
-    auditTARGET: audit
-  extra-summary: auditTARGET=audit /usbguard/Sanity/auditing
-  extra-nitrate: TC#0610000
+    summary: Check auditing to audit
+    environment:
+        auditTARGET: audit
+    extra-summary: auditTARGET=audit /usbguard/Sanity/auditing
+    extra-nitrate: TC#0610000
+    id: 4a0cc47a-7312-4c98-9abe-078ce9d31f84

@@ -1,5 +1,6 @@
 summary: usbguard basic functions
-description: Beakerlib library implementing various usbguard related functions that should simplify test implementation.
+description: Beakerlib library implementing various usbguard related functions 
+    that should simplify test implementation.
 contact: Patrik Koncity <pkoncity@redhat.com>
 component: []
 test: ./runtest.sh
@@ -9,6 +10,7 @@ enabled: true
 require:
   - usbguard
 adjust:
--   enabled: false
+  - enabled: false
     when: distro == rhel-4, rhel-5, rhel-6, rhel-7
     continue: false
+id: 32de0990-d219-4362-b060-0407b125117d
