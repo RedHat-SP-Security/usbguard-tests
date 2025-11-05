@@ -1,0 +1,22 @@
+summary: Check integrity of package - correct installation and permissions of the
+    package files
+description: Check there are no errors during package installation as in RHEL-113206.
+    Check permissions were updated to 0755 based and no mismatch is caused, based
+    on RHEL-92260.
+contact: Natália Bubáková <nbubakov@redhat.com>
+test: ./runtest.sh
+duration: 5m
+require+:
+  - library(ControlFlow/Cleanup)
+enabled: true
+tag:
+  - Tier3
+tier: '3'
+adjust+:
+  - enabled: false
+    when: distro < rhel-9.8
+    continue: false
+link:
+  - verifies: https://issues.redhat.com/browse/RHEL-113206
+  - verifies: https://issues.redhat.com/browse/RHEL-92260
+id: f6b58559-9b8e-4726-a24c-7d12c0e8a58a
