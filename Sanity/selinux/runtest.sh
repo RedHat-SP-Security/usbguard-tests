@@ -51,14 +51,10 @@ rlJournalStart && {
       rlSEMatchPathCon "/etc/usbguard/rules.d/test" "usbguard_rules_t"
       rlSEMatchPathCon "/etc/usbguard/usbguard-daemon.conf" "usbguard_conf_t"
       rlSEMatchPathCon "/usr/sbin/usbguard-daemon" "usbguard_exec_t"
-      if rlIsRHELLike '<10'; then
-          rlSEMatchPathCon "/var/run/usbguard.pid" "usbguard_var_run_t"
-      else
-          #see https://github.com/USBGuard/usbguard-selinux/commit/3534057c48a2c5f13c8209e8f67833fb7a086900 
-          rlServiceStart usbguard
-          rlSEMatchPathCon "/run/usbguard.pid" "usbguard_var_run_t"
-          rlServiceStop usbguard
-      fi
+
+      rlServiceStart usbguard
+      rlSEMatchPathCon "/run/usbguard.pid" "usbguard_var_run_t"
+      rlServiceStop usbguard
     rlPhaseEnd; }
 
     rlPhaseStartTest "policy rules" && {
