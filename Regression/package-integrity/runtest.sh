@@ -50,15 +50,15 @@ rlJournalStart
 
     rlPhaseStartTest "RHEL-92260 - mismatch in permissions"
         rlRun -s "ls -ld /var/log/usbguard/"
-        rlAssertGrep "drwxr-xr-x.\s+2\s+root\s+root.*/var/log/usbguard/" $rlRun_LOG -E
+        rlAssertGrep "drwx------.\s+2\s+root\s+root.*/var/log/usbguard/" $rlRun_LOG -E
 
-        rlAssertGrep "d\s+/var/log/usbguard\s+0755\s+root\s+root\s+-\s+-" "/usr/lib/tmpfiles.d/usbguard.conf" -E
+        rlAssertGrep "d\s+/var/log/usbguard\s+0700\s+root\s+root\s+-\s+-" "/usr/lib/tmpfiles.d/usbguard.conf" -E
 
         rlRun -s "rpm -qlv usbguard | grep /var/log/usbguard"
-        rlAssertGrep "drwxr-xr-x\s+2\s+root\s+root.*/var/log/usbguard" $rlRun_LOG -E
+        rlAssertGrep "drwx------\s+2\s+root\s+root.*/var/log/usbguard" $rlRun_LOG -E
 
         rlRun -s "rpm -V usbguard"
-        rlAssertNotGrep "\.M\.{7}\s+\/var\/log\/usbguard" $rlRun_LOG -E
+        rlAssertNotGrep "\.M\.{7}\s+/var/log/usbguard" $rlRun_LOG -E
     rlPhaseEnd
 
     rlPhaseStartCleanup
