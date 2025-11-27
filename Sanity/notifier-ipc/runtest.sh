@@ -37,8 +37,23 @@ rlJournalStart && {
     CleanupRegister "rlRun 'rm -r $TmpDir' 0 'Removing tmp directory'"
     CleanupRegister 'rlRun "popd"'
     rlRun "pushd $TmpDir"
-    CleanupRegister 'rlRun "rlFileRestore"'
     rlRun "rlFileBackup --clean /etc/usbguard"
+    if command -v bootc >/dev/null 2>&1; then
+      rlLog ":: Image Mode detected. Allow ssh connection with password."
+      # This ensures 'testUserSetup' succeeds in creating a valid password.
+      rlRun "mkdir -p /etc/security/pwquality.conf.d"
+      rlRun "rlFileBackup /etc/security/pwquality.conf.d/99-test.conf"
+      rlRun "echo -e 'minlen = 1\ndictcheck = 0' > /etc/security/pwquality.conf.d/99-test.conf"
+      # We insert settings at the TOP of the file (1i) so they take precedence over everything else.
+      rlRun "rlFileBackup /etc/ssh/sshd_config"
+      rlRun "sed -i '1i PasswordAuthentication yes' /etc/ssh/sshd_config"
+      rlRun "sed -i '1i KbdInteractiveAuthentication yes' /etc/ssh/sshd_config"
+      rlRun "sed -i '1i PermitEmptyPasswords yes' /etc/ssh/sshd_config"
+      rlRun "systemctl restart sshd"
+    else
+        rlLog ":: Standard System detected. Skipping Image Mode adjustments."
+    fi
+    CleanupRegister 'rlRun "rlFileRestore"'
     CleanupRegister 'rlRun "rlServiceRestore usbguard"'
     rlRun "rlServiceStart usbguard"
     CleanupRegister 'rlRun "testUserCleanup"'
@@ -88,7 +103,6 @@ userServiceCheck() {
     rlRun -s "rlServiceStatus usbguard"
     rlAssertGrep "IPC connection denied" $rlRun_LOG
     rm -f $rlRun_LOG
-
     rlLog "service enabled and IPC granted"
     rlRun "usbguard add-user $testUser -d listen"
     rlRun "rlServiceStart usbguard"
@@ -109,6 +123,7 @@ userServiceCheck() {
     CleanupDo
     #usbguard notifial need to stopped
     rlRun "systemctl stop --user usbguard-notifier"
+    rlRun "systemctl reload sshd"
   rlPhaseEnd; }
   rlJournalPrintText
 rlJournalEnd; }
