@@ -1,0 +1,39 @@
+# run with tmt without the prepare phase:
+# tmt run -vvv provision -h virtual --image http://images.osci.redhat.com/RHEL-10.0-image-mode-x86_64.qcow2 discover plan -n /Plans/image-mode-install execute report finish
+# or
+# TMT_SCRIPTS_DIR=/var/lib/tmt/scripts tmt --context distro=RHEL-10.0 run -vvv discover plan -n /Plans/image-mode-install provision -h connect -g IP -u root  execute
+# or
+# testing-farm request --tmt-environment TMT_SCRIPTS_DIR=/var/lib/tmt/scripts --compose RHEL-10.0-Nightly --git-url https://gitlab.cee.redhat.com/special-projects/tests/usbguard.git --git-ref master --plan /Plans/image-mode-install --arch x86_64,aarch64 -c distro=rhel-10
+
+summary: Runs minimal set of tests for Image Mode testing
+
+environment:
+  # overridden by NEWA
+  BOOTC_BASE_IMAGE: "images.paas.redhat.com/bootc/rhel-bootc:latest-10.2"
+  BOOTC_INSTALL_PACKAGES: "rsync beakerlib bootc podman usbguard usbguard-dbus usbguard-notifier usbguard-selinux usbguard-tools dbus dbus-daemon dbus-devel dbus-tools expect openssh-server polkit audit*"
+  # configure repo with a brew build using taskID
+  #TASKS: 67026783
+
+context:
+    deploymentmode: image
+
+discover:
+  - name: ImageMode_setup
+    how: fmf
+    url: https://gitlab.cee.redhat.com/rhel-tests/distribution.git
+    test:
+     - /setup/rhel-buildroot
+     - /setup/bootc_test_prepare
+
+  - name: Upstream_usbguard_file_ownership
+    how: fmf
+    test:
+     - /Sanity/notifier-ipc
+
+execute:
+    how: tmt
+
+adjust+:
+  - when: distro < rhel-9 or distro ~< rhel-9.6
+    enabled: false
+    because: Image mode was not supported
