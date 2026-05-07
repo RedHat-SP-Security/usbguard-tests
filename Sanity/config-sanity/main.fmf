@@ -6,3 +6,5 @@ require:
 - library(ControlFlow/Cleanup)
 - library(ControlFlow/ConditionalPhases)
 - usbguard
+tag:
+  - fips
