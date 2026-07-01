@@ -1,4 +1,6 @@
 summary: Legacy file path in unit file
+description: Verify that starting the usbguard service does not produce legacy
+    directory path warnings in the systemd journal.
 contact: Dalibor Pospíšil <dapospis@redhat.com>
 test: ./runtest.sh
 require+:

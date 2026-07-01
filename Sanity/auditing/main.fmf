@@ -1,3 +1,6 @@
+description: Verify that usbguard audit events are correctly routed to either the
+    file-based audit log or the Linux Audit subsystem depending on the configured
+    AuditBackend setting.
 contact: Dalibor Pospíšil <dapospis@redhat.com>
 test: ./runtest.sh
 duration: 5m

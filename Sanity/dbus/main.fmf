@@ -1,3 +1,6 @@
+description: Verify that usbguard-dbus PolicyKit actions are present and that D-Bus
+    access control correctly enforces per-user and per-group permissions for parameter,
+    rule, and device management operations.
 contact: Attila Lakatos <alakatos@redhat.com>
 enabled: true
 require+:

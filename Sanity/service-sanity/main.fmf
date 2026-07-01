@@ -1,5 +1,7 @@
 summary: exercises usbguard service-related daemon functionality
-description: ''
+description: Verify that the usbguard service starts, stops, and restarts correctly,
+    fails gracefully on invalid rules configuration, and does not emit IPAddressDeny
+    warnings in the journal.
 contact: Dalibor Pospíšil <dapospis@redhat.com>
 test: ./runtest.sh
 recommend:

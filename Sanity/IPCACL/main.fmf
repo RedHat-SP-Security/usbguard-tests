@@ -1,3 +1,6 @@
+description: Verify that usbguard IPC access control correctly enforces per-user,
+    per-group, primary group, and supplementary group permissions for device, policy,
+    and parameter operations.
 contact: Dalibor Pospíšil <dapospis@redhat.com>
 enabled: true
 require+:

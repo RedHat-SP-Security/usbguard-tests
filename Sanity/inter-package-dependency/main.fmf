@@ -1,4 +1,7 @@
 summary: Packages dependency relationship
+description: Verify that usbguard and usbguard-selinux RPM packages declare correct
+    dependency, recommends, and conflicts relationships with each other and with
+    selinux-policy-targeted.
 contact: Dalibor Pospíšil <dapospis@redhat.com>
 test: ./runtest.sh
 require+:
