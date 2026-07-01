@@ -1,5 +1,6 @@
 summary: usbguard basic functions
-description: Beakerlib library implementing various usbguard related functions 
+description: |
+    Beakerlib library implementing various usbguard related functions
     that should simplify test implementation.
 contact: Patrik Koncity <pkoncity@redhat.com>
 component: []

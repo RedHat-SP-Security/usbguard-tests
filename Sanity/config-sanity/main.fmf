@@ -1,7 +1,9 @@
 summary: tries out valid and invalid config file keywords
-description: Verify that the usbguard daemon correctly rejects invalid configuration
-    directive names and values, and properly handles RuleFile and RuleFolder settings
-    including their interaction and rule ordering.
+description: |
+    Verify that the usbguard daemon correctly rejects invalid
+    configuration directive names and values, and properly handles
+    RuleFile and RuleFolder settings including their interaction
+    and rule ordering.
 contact: Dalibor Pospíšil <dapospis@redhat.com>
 test: ./runtest.sh
 require:

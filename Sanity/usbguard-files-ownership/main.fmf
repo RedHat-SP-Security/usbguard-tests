@@ -1,5 +1,6 @@
 summary: Verify correct file ownership
-description: Verifies if important usbguard files have correct ownership
+description: |
+    Verifies if important usbguard files have correct ownership
 contact: Natália Bubáková <nbubakov@redhat.com>
 component:
   - usbguard

@@ -1,4 +1,5 @@
-description: rules management in RuleFile and RuleFolder
+description: |
+    rules management in RuleFile and RuleFolder
 contact: Dalibor Pospíšil <dapospis@redhat.com>
 test: ./runtest.sh
 require+:

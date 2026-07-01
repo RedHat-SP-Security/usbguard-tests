@@ -1,7 +1,9 @@
 summary: test usbguard IPC handling via cli
-description: Verify that usbguard add-user validates IPC permission inputs correctly,
-    rejects invalid privileges per section, expands the ALL keyword properly, and
-    documents all valid privilege strings in the man pages.
+description: |
+    Verify that usbguard add-user validates IPC permission inputs
+    correctly, rejects invalid privileges per section, expands the
+    ALL keyword properly, and documents all valid privilege strings
+    in the man pages.
 extra-summary: /usbguard/Regression/bz2005020-IPC-permissions-validations
 contact: Dalibor Pospíšil <dapospis@redhat.com>
 test: ./runtest.sh
