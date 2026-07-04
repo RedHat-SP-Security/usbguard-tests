@@ -1,4 +1,8 @@
 summary: Testing if usbguard list-rules --label "something" works properly
+description: |
+    Verify that usbguard list-rules --label correctly filters
+    rules by label attribute and does not fail when some rules
+    lack the optional label field.
 contact: Attila Lakatos <alakatos@redhat.com>
 test: ./runtest.sh
 require:

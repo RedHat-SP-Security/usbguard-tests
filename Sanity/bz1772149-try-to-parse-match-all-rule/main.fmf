@@ -1,5 +1,8 @@
 summary: Tryies to parse match-all rule
-description: ''
+description: |
+    Verify that the usbguard-rule-parser correctly parses a
+    match-all rule with wildcard device ID and multiple interface
+    classes.
 contact: Dalibor Pospíšil <dapospis@redhat.com>
 test: ./runtest.sh
 recommend:
